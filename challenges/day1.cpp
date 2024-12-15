@@ -1,6 +1,9 @@
-#include <cctype>
+#include <algorithm>
+#include <cstddef>
+#include <cstdlib>
 #include <fstream>
 #include <iostream>
+#include <ostream>
 #include <string>
 #include <vector>
 
@@ -15,22 +18,30 @@ void part1() {
   std::vector<int> left;
   std::vector<int> right;
 
-  while (std::getline(file, line)) {
-    bool first = true;
-    for (char c : line) {
-      if (!std::isspace(c) && first) {
-        left.push_back(c - '0');
+  int n;
+  bool leftCol = true;
 
-        first = false;
-      } else if (!std::isspace(c)) {
-        right.push_back(c - '0');
-      }
+  while (file >> n) {
+    if (leftCol) {
+      left.push_back(n);
+      leftCol = !leftCol;
+    } else {
+
+      leftCol = !leftCol;
+      right.push_back(n);
     }
   }
 
-  for (int n : right) {
-    std::cout << n << " ";
+  std::sort(left.begin(), left.end());
+  std::sort(right.begin(), right.end());
+
+  int result = 0;
+
+  for (size_t i = 0; i < left.size(); i++) {
+    result += std::abs(left[i] - right[i]);
   }
+
+  std::cout << result << std::endl;
 
   file.close();
 }
