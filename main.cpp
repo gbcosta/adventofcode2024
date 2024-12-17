@@ -1,6 +1,6 @@
-#include "challenges/day1.h"
+#include "challenges/challenges.h"
 
 int main() {
-  part1();
+  day1_2();
   return 0;
 }
