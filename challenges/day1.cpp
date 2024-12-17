@@ -70,9 +70,10 @@ void day1_2() {
   }
 
   int result = 0;
+  int similarityScore = 0;
 
   for (int leftNumber : left) {
-    int similarityScore = 0;
+    similarityScore = 0;
     for (int rightNumber : right) {
       if (leftNumber == rightNumber) {
         similarityScore++;
